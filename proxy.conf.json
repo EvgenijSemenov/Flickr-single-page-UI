@@ -1,13 +1,22 @@
- {
-  "/services": {
-     "target":  {
-       "host": "www.flickr.com",
-       "protocol": "https:",
-       "port": 443
-     },
-     "secure": false,
-     "changeOrigin": true,
-     "logLevel": "info"
-   }
- }
-  
+{
+  "/service": {
+    "target": {
+      "host": "www.flickr.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "info"
+  },
+  "/service/rest": {
+    "target": {
+      "host": "api.flickr.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "info"
+  }
+}
