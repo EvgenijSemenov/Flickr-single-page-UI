@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  title = "Title";
+
+  constructor(private location: Location) {
+  }
+
+  public isNotFlickrOauthCallback() {
+    return !(this.location.path().indexOf("/flickr-oauth-callback") > -1);
+  }
+
 }
