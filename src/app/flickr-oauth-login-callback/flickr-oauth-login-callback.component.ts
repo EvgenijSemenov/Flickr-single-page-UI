@@ -3,11 +3,12 @@ import { FlickrRequestUrlBuilder } from '../flickr/flickr-request-url-builder';
 
 @Component({
   selector: 'app-flickr-oauth-login-callback',
+  template: ''
 })
 export class FlickrOauthLoginCallbackComponent {
 
   constructor() {
-    this.flickrOauthCallbeck()
+    this.flickrOauthCallbeck();
   }
 
   private flickrOauthCallbeck() {
