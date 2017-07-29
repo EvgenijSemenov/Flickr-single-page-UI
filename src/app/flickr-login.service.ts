@@ -1,55 +1,65 @@
 import { request } from 'http';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import * as CryptoJS from 'crypto-js';
+import { FlickrRequestUrlBuilder } from './flickr/flickr-request-url-builder';
 
 @Injectable()
 export class FlickrLoginService {
 
-  key: string = "e180b96bece37e723341684dd8662931";
-  secret: string = "e124ba5bf1b23193";
-
-  flickrRequestTokenUrl: string = "https://www.flickr.com/services/oauth/request_token?";
-  oauth_nonce: string = "89601180";
-
+  private appCredential;
+  
   constructor(private http: Http) { }
 
-  public test() {
-    //this.http.get("https://api.flickr.com/services/rest/?method=flickr.auth.oauth.getAccessToken&api_key=98c22e511ceb91a7f0e26a18b4b6fa05&format=json&nojsoncallback=1&auth_token=72157684186202213-09bcce570512e2ad&api_sig=b0fe6846f3ddd11dc8eb41932b5410ef").subscribe(data => console.log(data));
-    let requestUrl = this.flickrRequestTokenUrl;
-    requestUrl += "oauth_nonce=" + (Math.random() * (1000000 - 100000) + 100000);
-    requestUrl += "&oauth_timestamp=" + Date.now();
-    requestUrl += "&oauth_consumer_key=" + this.key;
-    requestUrl += "&oauth_signature_method=HMAC-SHA1";
-    requestUrl += "&oauth_version=1.0";
-    requestUrl += "&oauth_callback=http%3A%2F%2Flocalhost%3A4200";
-    console.log("RequestUrl: " + requestUrl);
-    requestUrl = this.signRequest("GET", requestUrl);
-    this.http.get(requestUrl.replace("https://www.flickr.com/", "")).subscribe(data => console.log(data));
+  public login(apikey: string, apiSecret: string) {
+    this.initAppCredential(apikey, apiSecret);
+    let requestTokenUrl: string = FlickrRequestUrlBuilder.requestTokenUrl(this.appCredential)
+    
+    this.http.get(requestTokenUrl).subscribe(data => {
+      let paramsString: string = data.text();
+
+      this.appCredential["oauthToken"] = FlickrRequestUrlBuilder.urlParamValue(paramsString, "oauth_token");
+      this.appCredential["oauthTokenSecret"] = FlickrRequestUrlBuilder.urlParamValue(paramsString, "oauth_token_secret");
+      
+      this.authorizationRequest(FlickrRequestUrlBuilder.authorizationRequestUrl(this.appCredential));
+    });
   }
 
-  private signRequest(method: string, requestUrl: string): string {
-    let baseString: string = method + "&" + this.baseStringFromUrl(requestUrl);
-    console.log(baseString);
-    //let encrypted = CryptoJS.HmacSHA1(baseString, this.key + "&" + this.secret);
-    let hmacSHA1: string = CryptoJS.HmacSHA1(baseString, this.secret + "&");
-    console.log("hmacSHA1: " + hmacSHA1);
-    requestUrl += "&oauth_signature=" + encodeURI(CryptoJS.enc.Base64.stringify(hmacSHA1));
-
-    return requestUrl;
+  private initAppCredential(apikey: string, apiSecret: string) {
+    this.appCredential = {
+      "apiKey": apikey,
+      "apiSecret": apiSecret,
+      "oauthToken": "",
+      "oauthTokenSecret": "",
+      "oauthVerifier": ""
+    }
   }
 
-  private baseStringFromUrl(url: string): string {
-    let baseString: string = url.split("?")[0] + "&";
-    baseString += url.split("?")[1].split("&").sort().join("%26");
-    baseString = baseString.replace(new RegExp(":", 'g'), "%3A");
-    baseString = baseString.replace(new RegExp("/", 'g'), "%2F");
-    baseString = baseString.replace(new RegExp("=", 'g'), "%3D");
-    baseString = baseString.replace(new RegExp("http%3A%2F%2Flocalhost%3A4200", 'g'), "http%253A%252F%252Flocalhost%253A4200");
+  private authorizationRequest(url: string) {
+    this.addOauthCallbeckListener();
+    this.openRequestInNewTab(url);
+  }
 
-    return baseString;
+  private openRequestInNewTab(url: string) {
+    window.open(url, '_blank').focus();
+  }
+
+  private addOauthCallbeckListener() {
+    window.addEventListener("FlickrOauthCallbeck", e => this.flickerOauthHandler(e), false);
+  }
+
+  private flickerOauthHandler(event) {
+    this.appCredential["oauthVerifier"] = event.detail["oauth_verifier"];
+    let accessTokenUrl: string = FlickrRequestUrlBuilder.accessTokenUrl(this.appCredential);
+    this.http.get(accessTokenUrl).subscribe(data => this.test(data.text()));
+  }
+
+  private test(text: string) {
+    this.appCredential["oauthToken"] = FlickrRequestUrlBuilder.urlParamValue(text, "oauth_token");
+    this.appCredential["oauthTokenSecret"] = FlickrRequestUrlBuilder.urlParamValue(text, "oauth_token_secret");
+
+    let url: string = FlickrRequestUrlBuilder.apiUrl("flickr.test.login", this.appCredential);
+    console.log(url);
+    this.http.get(url).subscribe(data => console.log(data));
   }
 
 }
-"GET&https%3A%2F%2Fwww.flickr.com%2Fservices%2Foauth%2Frequest_token&oauth_callback%3Dhttp%253A%252F%252Flocalhost%253A4200%26oauth_consumer_key%3De180b96bece37e723341684dd8662931%26oauth_nonce%3D110185.58638325773%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1501162067084%26oauth_version%3D1.0"
-"GET&https%3A%2F%2Fwww.flickr.com%2Fservices%2Foauth%2Frequest_token&oauth_callback%3Dhttp%253A%252F%252Flocalhost%253A4200%26oauth_consumer_key%3De180b96bece37e723341684dd8662931%26oauth_nonce%3D110185.58638325773%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1501162067084%26oauth_version%3D1.0"
