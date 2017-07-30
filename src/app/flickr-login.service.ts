@@ -1,33 +1,35 @@
 import { request } from 'http';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 import { FlickrRequestUrlBuilder } from './flickr/flickr-request-url-builder';
 
 @Injectable()
 export class FlickrLoginService {
 
   private appCredential;
+  private onSuccess:(body: string) => void;
   
   constructor(private http: Http) { }
 
-  public login(apikey: string, apiSecret: string) {
-    this.initAppCredential(apikey, apiSecret);
+  public login(appCredential, onSuccess:(body: string) => void) {
+    this.onSuccess = onSuccess;
+    this.initAppCredential(appCredential);
     let requestTokenUrl: string = FlickrRequestUrlBuilder.requestTokenUrl(this.appCredential)
     
     this.http.get(requestTokenUrl).subscribe(data => {
-      let paramsString: string = data.text();
+      let searchParams: URLSearchParams = new URLSearchParams(data.text());
 
-      this.appCredential["oauthToken"] = FlickrRequestUrlBuilder.urlParamValue(paramsString, "oauth_token");
-      this.appCredential["oauthTokenSecret"] = FlickrRequestUrlBuilder.urlParamValue(paramsString, "oauth_token_secret");
+      this.appCredential["oauthToken"] = searchParams.get("oauth_token");
+      this.appCredential["oauthTokenSecret"] = searchParams.get("oauth_token_secret");
       
       this.authorizationRequest(FlickrRequestUrlBuilder.authorizationRequestUrl(this.appCredential));
     });
   }
 
-  private initAppCredential(apikey: string, apiSecret: string) {
+  private initAppCredential(appCredential) {
     this.appCredential = {
-      "apiKey": apikey,
-      "apiSecret": apiSecret,
+      "apiKey": appCredential["apiKey"],
+      "apiSecret": appCredential["apiSecret"],
       "oauthToken": "",
       "oauthTokenSecret": "",
       "oauthVerifier": ""
@@ -50,16 +52,9 @@ export class FlickrLoginService {
   private flickerOauthHandler(event) {
     this.appCredential["oauthVerifier"] = event.detail["oauth_verifier"];
     let accessTokenUrl: string = FlickrRequestUrlBuilder.accessTokenUrl(this.appCredential);
-    this.http.get(accessTokenUrl).subscribe(data => this.test(data.text()));
-  }
-
-  private test(text: string) {
-    this.appCredential["oauthToken"] = FlickrRequestUrlBuilder.urlParamValue(text, "oauth_token");
-    this.appCredential["oauthTokenSecret"] = FlickrRequestUrlBuilder.urlParamValue(text, "oauth_token_secret");
-
-    let url: string = FlickrRequestUrlBuilder.apiUrl("flickr.test.login", this.appCredential);
-    console.log(url);
-    this.http.get(url).subscribe(data => console.log(data));
+    this.http.get(accessTokenUrl).subscribe(data => {
+      this.onSuccess(decodeURIComponent(data.text()));
+    });
   }
 
 }

@@ -1,3 +1,4 @@
+import { URLSearchParams } from '@angular/http';
 import * as CryptoJS from 'crypto-js';
 
 export class FlickrRequestUrlBuilder {
@@ -13,9 +14,11 @@ export class FlickrRequestUrlBuilder {
   
   public static requestTokenUrl(appCredential): string {
     let url: string = this.flickrUrl + this.requestTokenUri;
-    url += this.preRequesUrlParams(appCredential["apiKey"]);
-    url += this.oauthCallbackParam();
-    url += this.urlSignatureParam("GET", url, appCredential);
+    url += "?" + this.preRequesUrlParams(appCredential["apiKey"]);
+    url += "&" + this.oauthCallbackParam();
+    url += "&" + this.urlSignatureParam("GET", url, appCredential);
+
+    console.log(url);
 
     return this.removeFlickrUrlPrefix(url);
   }
@@ -26,73 +29,75 @@ export class FlickrRequestUrlBuilder {
 
   public static accessTokenUrl(appCredential) {
     let url: string = this.flickrUrl + this.oauthAccessTokenUri;
-    url += this.preRequesUrlParams(appCredential["apiKey"]);
-    url += this.oauthTokenParam(appCredential["oauthToken"]);
-    url += this.oauthVerifierParam(appCredential["oauthVerifier"]);
-    url += this.urlSignatureParam("GET", url, appCredential);
+    url += "?" + this.preRequesUrlParams(appCredential["apiKey"]);
+    url += "&" + this.oauthTokenParam(appCredential["oauthToken"]);
+    url += "&" + this.oauthVerifierParam(appCredential["oauthVerifier"]);
+    url += "&" + this.urlSignatureParam("GET", url, appCredential);
 
     return this.removeFlickrUrlPrefix(url);
   }
 
   public static apiUrl(apiParamMethod: string, appCredential): string {
     let url: string = this.flickrUrl + this.apiUri;
-    url += this.preRequesUrlParams(appCredential["apiKey"]);
-    url += this.oauthTokenParam(appCredential["oauthToken"]);
-    url += this.apiMethodParam(apiParamMethod);
-    url += this.jsonFormatParams();
-    url += this.urlSignatureParam("GET", url, appCredential);
+    url += "?" + this.preRequesUrlParams(appCredential["apiKey"]);
+    url += "&" + this.oauthTokenParam(appCredential["oauthToken"]);
+    url += "&" + this.apiMethodParam(apiParamMethod);
+    url += "&" + this.jsonFormatParams();
+    url += "&" + this.urlSignatureParam("GET", url, appCredential);
 
     return this.removeFlickrUrlPrefix(url);
   }
 
-  public static urlParamValue(paramsString: string, paramName: string): string {
-    let value: string = "";
-    let params: string[] = paramsString.split("&");
-
-    for (let i = 0; i < params.length; i++) {
-      if (params[i].startsWith(paramName + "=")) {
-        value = params[i].split("=")[1];
-        break;
-      }
-    }
-
-    return value;
-  }
-
   private static preRequesUrlParams(apiKey: string): string {
-    let paramString: string = "?oauth_nonce=" + this.requestNonce();
-    paramString += "&oauth_timestamp=" + Date.now();
-    paramString += "&oauth_consumer_key=" + apiKey;
-    paramString += "&oauth_signature_method=HMAC-SHA1";
-    paramString += "&oauth_version=1.0";   
-    
-    return paramString;
+    let urlSearchParams: URLSearchParams = new URLSearchParams();
+    urlSearchParams.set("oauth_nonce", this.requestNonce());
+    urlSearchParams.set("oauth_timestamp", Date.now().toString());
+    urlSearchParams.set("oauth_consumer_key", apiKey);
+    urlSearchParams.set("oauth_signature_method", "HMAC-SHA1");
+    urlSearchParams.set("oauth_version", "1.0");   
+
+    return urlSearchParams.toString();
   }
 
   private static oauthTokenParam(oauthToken: string): string {
-    return "&oauth_token=" + oauthToken;
+    let urlSearchParams: URLSearchParams = new URLSearchParams();
+    urlSearchParams.set("oauth_token", oauthToken);
+
+    return urlSearchParams.toString();
   }
 
   private static oauthVerifierParam(oauthVerifier: string): string {
-    return "&oauth_verifier=" + oauthVerifier;
+    let urlSearchParams: URLSearchParams = new URLSearchParams();
+    urlSearchParams.set("oauth_verifier", oauthVerifier);
+
+    return urlSearchParams.toString();
   }
 
   private static apiMethodParam(apiMethod: string): string {
-    return "&method=" + apiMethod;
+    let urlSearchParams: URLSearchParams = new URLSearchParams();
+    urlSearchParams.set("method", apiMethod);
+
+    return urlSearchParams.toString();
   }
 
   private static jsonFormatParams(): string {
-    return "&nojsoncallback=1&format=json";
-  }
+    let urlSearchParams: URLSearchParams = new URLSearchParams();
+    urlSearchParams.set("format", "json");
+    urlSearchParams.set("nojsoncallback", "1");
 
-  private static requestNonce(): string {
-    return (Math.random() * (1000000 - 100000) + 100000).toString();
+    return urlSearchParams.toString();
   }
 
   private static oauthCallbackParam(): string {
     let oauthCallbackUrl: string = this.applicationDomainAddress() + this.oauthCallbackUri;
+    let urlSearchParams: URLSearchParams = new URLSearchParams();
+    urlSearchParams.set("oauth_callback", encodeURIComponent(oauthCallbackUrl));
 
-    return "&oauth_callback=" + encodeURIComponent(oauthCallbackUrl);
+    return urlSearchParams.toString();
+  }
+
+  private static requestNonce(): string {
+    return (Math.random() * (1000000 - 100000) + 100000).toString();
   }
 
   private static applicationDomainAddress(): string {
@@ -104,11 +109,14 @@ export class FlickrRequestUrlBuilder {
     return domainAddress;
   }
 
-  private static urlSignatureParam(requestMethod:string, url: string, appCredential) {
+  private static urlSignatureParam(requestMethod:string, url: string, appCredential): string {
+    console.log(requestMethod);
+    console.log(url);
+    console.log(appCredential);
     let baseString: string = requestMethod + "&" + this.baseStringFromUrl(url);
     let hmacSHA1: string = CryptoJS.HmacSHA1(baseString, appCredential["apiSecret"] + "&" + appCredential["oauthTokenSecret"]);
 
-    return "&oauth_signature=" + encodeURIComponent(CryptoJS.enc.Base64.stringify(hmacSHA1));
+    return "oauth_signature=" + encodeURIComponent(CryptoJS.enc.Base64.stringify(hmacSHA1));
   }
 
   private static baseStringFromUrl(url: string): string {

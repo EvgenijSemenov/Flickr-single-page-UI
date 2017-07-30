@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FlickrRequestUrlBuilder } from '../flickr/flickr-request-url-builder';
+import { URLSearchParams } from '@angular/http';
 
 @Component({
   selector: 'app-flickr-oauth-login-callback',
@@ -12,11 +12,11 @@ export class FlickrOauthLoginCallbackComponent {
   }
 
   private flickrOauthCallbeck() {
-    let urlParams: string = window.location.href.split("?")[1];
+    let searchParams: URLSearchParams = new URLSearchParams(window.location.href.split("?")[1]);
     let event = new CustomEvent("FlickrOauthCallbeck", {
       "detail": {
-        "oauth_token": FlickrRequestUrlBuilder.urlParamValue(urlParams, "oauth_token"),
-        "oauth_verifier": FlickrRequestUrlBuilder.urlParamValue(urlParams, "oauth_verifier")
+        "oauth_token": searchParams.get("oauth_token"),
+        "oauth_verifier": searchParams.get("oauth_verifier")
       }
     });
 
