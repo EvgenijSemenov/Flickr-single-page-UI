@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
+import { environment } from '../../environments/environment';
 import { FlickrLoginService } from '../flickr-login.service';
 
 @Component({
@@ -9,16 +10,14 @@ import { FlickrLoginService } from '../flickr-login.service';
 })
 export class FlickrLoginComponent {
 
-  apiKey: string = "e180b96bece37e723341684dd8662931";
-  apiSecret: string = "e124ba5bf1b23193";
 
   constructor(private flickrLoginService:FlickrLoginService) {
   }
 
   private flickrLogin() {
     let flickrAppCredential = {
-      "apiKey": this.apiKey,
-      "apiSecret": this.apiSecret
+      "apiKey": environment.apiKey,
+      "apiSecret": environment.apiSecret
     }
 
     this.flickrLoginService.login(flickrAppCredential, this.onSuccessLogin);
