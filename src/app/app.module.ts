@@ -7,16 +7,19 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { FlickrLoginService } from './flickr-login.service';
+import { FlickrApiService } from './flickr-api.service';
 import { FlickrOauthLoginCallbackComponent } from './flickr-oauth-login-callback/flickr-oauth-login-callback.component';
 import { FlickrLoginComponent } from './flickr-login/flickr-login.component';
 import { AlbumsListComponent } from './albums-list/albums-list.component';
+import { NavigationTabsComponent } from './navigation-tabs/navigation-tabs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FlickrOauthLoginCallbackComponent,
     FlickrLoginComponent,
-    AlbumsListComponent
+    AlbumsListComponent,
+    NavigationTabsComponent
   ],
   imports: [
     BrowserModule,
@@ -32,12 +35,15 @@ import { AlbumsListComponent } from './albums-list/albums-list.component';
         component: FlickrOauthLoginCallbackComponent
       },
       {
-        path: 'album-list',
+        path: 'albums',
         component: AlbumsListComponent
       }
     ])
   ],
-  providers: [FlickrLoginService],
+  providers: [
+    FlickrLoginService,
+    FlickrApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
