@@ -37,12 +37,13 @@ export class FlickrRequestUrlBuilder {
     return this.removeFlickrUrlPrefix(url);
   }
 
-  public static apiUrl(apiParamMethod: string, appCredential): string {
+  public static apiUrl(appCredential, apiParamMethod: string, extraParams?: string): string {
     let url: string = this.flickrUrl + this.apiUri;
     url += "?" + this.preRequesUrlParams(appCredential["apiKey"]);
     url += "&" + this.oauthTokenParam(appCredential["oauthToken"]);
     url += "&" + this.apiMethodParam(apiParamMethod);
     url += "&" + this.jsonFormatParams();
+    url += "&" + extraParams;
     url += "&" + this.urlSignatureParam("GET", url, appCredential);
 
     return this.removeFlickrUrlPrefix(url);
