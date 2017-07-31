@@ -11,8 +11,20 @@ export class AppComponent {
   constructor(private location: Location) {
   }
 
-  public isNotFlickrOauthCallback() {
-    return !(this.location.path().indexOf("/flickr-oauth-callback") > -1);
+  public isHidden() {
+    let list = ["/flickr-oauth-callback", ""];
+    let route = this.location.path();
+    
+    for(let i = 0; i < list.length; i++) {
+      if (route === list[i]) {
+
+        return true;
+      }
+    }
+
+    console.log(this.location.path());
+
+    return false;
   }
 
 }
