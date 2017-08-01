@@ -1,29 +1,6 @@
-.album-title {
-    color: rgba(120, 120, 120, 1);
-    display: flex;
-    align-items: center;
-    padding: 2px;
-}
-
-.back-icon {
-    font-size: 26px;
-    padding-right: 10px;
-    font-weight: bold;
-}
-
-.back-icon:hover {
-    color: #337ab7;
-    cursor:pointer;
-}
-
 .folder-icon {
     font-size: 21px;
     padding-right: 10px;
-}
-
-.album-title-text {
-    font-size: 14px;
-    font-weight: bold;
 }
 
 .photo {

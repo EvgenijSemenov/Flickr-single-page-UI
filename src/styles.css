@@ -21,3 +21,27 @@
     background-color: rgba(160, 160, 160, 0.35);
     cursor:pointer;
 }
+
+.top-info-panel {
+    color: rgba(120, 120, 120, 1);
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    min-height: 30px;
+}
+
+.top-info-panel-text {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.back-icon {
+    font-size: 26px;
+    padding-right: 10px;
+    font-weight: bold;
+}
+
+.back-icon:hover {
+    color: #337ab7;
+    cursor:pointer;
+}
