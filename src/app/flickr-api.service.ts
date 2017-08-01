@@ -1,3 +1,4 @@
+import { Size } from './model/size';
 import { Photo } from './model/photo';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
@@ -74,4 +75,13 @@ export class FlickrApiService {
   }
 
   public getPhotoSizes(photoId: string): Observable<Size[]> {
+    let method: string = "flickr.photos.getSizes";
+    let extraParams: string = "photo_id=" + photoId;
+    let url: string = FlickrRequestUrlBuilder.apiUrl(Flickr.getAuthCredential(), method, extraParams);
+  
+    return this.http.get(url)
+      .map((res: Response) => res.json().sizes.size as Size[])
+      .catch((err:any) => Observable.throw(err.json().error || 'Server error'));
+  }
+
 }
