@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
@@ -6,23 +6,24 @@ import { Location } from '@angular/common';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   constructor(private location: Location) {
   }
 
+  ngOnInit() {
+  }
+  
   public isHidden() {
     let list = ["/flickr-oauth-callback", ""];
     let route = this.location.path();
-    
+
     for(let i = 0; i < list.length; i++) {
       if (route === list[i]) {
 
         return true;
       }
     }
-
-    console.log(this.location.path());
 
     return false;
   }
