@@ -49,7 +49,7 @@ export class AlbumsListComponent implements OnInit {
   }
 
   private openAlbum(id: string) {
-    this.router.navigate(["/albums", id]);
+    this.router.navigate(["/album", id]);
   }
 
 }
