@@ -60,4 +60,18 @@ export class FlickrApiService {
       .catch((err:any) => Observable.throw(err.json().error || 'Server error'));
   }
 
+  public getPhotoInfo(photoId: string, secret?: string): Observable<Photo> {
+    let method: string = "flickr.photos.getInfo";
+    let extraParams: string = "photo_id=" + photoId;
+    if (secret) {
+      extraParams += "&secret=" + secret;
+    }
+    let url: string = FlickrRequestUrlBuilder.apiUrl(Flickr.getAuthCredential(), method, extraParams);
+  
+    return this.http.get(url)
+      .map((res: Response) => res.json().photo as Photo)
+      .catch((err:any) => Observable.throw(err.json().error || 'Server error'));
+  }
+
+  public getPhotoSizes(photoId: string): Observable<Size[]> {
 }
