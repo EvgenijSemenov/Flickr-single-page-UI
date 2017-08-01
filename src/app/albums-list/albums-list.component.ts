@@ -32,6 +32,15 @@ export class AlbumsListComponent implements OnInit {
         }
       });
   }
+
+  private loadPhotoset() {
+    let page: number = 1
+    if (this.photosetList.length != 0) {
+      page = this.photosetList.length / this.photosetPerPage + 1;
+    }
+    this.flickrApiServicel.photosetListByUserId(this.userId, page, this.photosetPerPage, this.appCredential())
+      .subscribe(photosetList => this.photosetList = this.photosetList.concat(photosetList));
+  }
   }
 
 }
