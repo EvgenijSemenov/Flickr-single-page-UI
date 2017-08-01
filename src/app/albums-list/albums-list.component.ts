@@ -48,4 +48,8 @@ export class AlbumsListComponent implements OnInit {
     return (this.photosetList.length == this.photosetsTotal);
   }
 
+  private openAlbum(id: string) {
+    this.router.navigate(["/albums", id]);
+  }
+
 }
