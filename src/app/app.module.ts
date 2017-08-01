@@ -42,6 +42,10 @@ import { PhotoComponent } from './photo/photo.component';
       {
         path: 'albums',
         component: AlbumsListComponent
+      },
+      {
+        path: 'albums/:id',
+        component: PhotoListComponent
       }
     ]),
     MomentModule
