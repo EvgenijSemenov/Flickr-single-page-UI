@@ -1,5 +1,5 @@
-<div class="col-md-12 bottom-border">
-  <h5>Welcome, {{fullName}}</h5>
+<div class="col-md-12 top-info-panel bottom-border">
+  <span class="top-info-panel-text">Welcome, {{fullName}}</span>
 </div>
 <template ngFor let-photoset [ngForOf] = "photosetList">
   <div class="col-md-12 bottom-border album vertical-align" (click)="openAlbum(photoset.id)">
