@@ -21,6 +21,13 @@ export class PhotoInfoComponent implements OnInit {
               private apiService: FlickrApiService
   ) { }
   ngOnInit() {
+  private initPhoto(photoId: string) {
+    this.apiService.getPhotoInfo(photoId).subscribe(photo => {
+      this.photo = photo;
+      console.log(this.photo);
+    });
+  }
+
   private initPhotoSource(photoId: string) {
     this.apiService.getPhotoSizes(photoId).subscribe(sizes => {
       this.photoSize = this.getSizeForCurrentScreen(sizes);
