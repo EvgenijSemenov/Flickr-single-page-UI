@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Photoset } from '../model/photoset';
 import { Photo } from '../model/photo';
 import { FlickrApiService } from '../flickr-api.service';
@@ -15,7 +15,10 @@ export class PhotoListComponent implements OnInit {
   private photoPerPage: number = 18;
   private photos: Photo[];
 
-  constructor(private activatedRoute : ActivatedRoute, private apiService: FlickrApiService) { }
+  constructor(private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private apiService: FlickrApiService
+  ) { }
 
   ngOnInit() {
     this.initData();
@@ -66,6 +69,10 @@ export class PhotoListComponent implements OnInit {
     }
 
     return result;
+  }
+
+  private openPhoto(photoId: string) {
+    this.router.navigate(["/album/" + this.photoset.id + "/photo/", photoId]);
   }
 
 }
