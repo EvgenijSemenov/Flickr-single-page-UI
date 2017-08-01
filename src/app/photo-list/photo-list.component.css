@@ -49,6 +49,11 @@
     color: #337ab7;
     text-decoration: underline;
     margin-left: 5px;
+    cursor:pointer;
+}
+
+.photo-select:hover {
+    text-decoration: none;
 }
 
 .photo-select.select {
