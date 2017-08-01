@@ -17,9 +17,20 @@ export class FlickrApiService {
     extraParams += "&page=1";
     extraParams += "&per_page=0";
     let url: string = FlickrRequestUrlBuilder.apiUrl(Flickr.getAuthCredential(), "flickr.photosets.getList", extraParams);
-    
+
     return this.http.get(url)
       .map((res: Response) => res.json().photosets.total as number)
+      .catch((err:any) => Observable.throw(err.json().error || 'Server error'));
+  }
+
+  public getPhotoset(userId: string, photosetId: string): Observable<Photoset> {
+    let method: string = "flickr.photosets.getInfo";
+    let extraParams: string = "user_id=" + userId;
+    extraParams += "&photoset_id=" + photosetId;
+    let url: string = FlickrRequestUrlBuilder.apiUrl(Flickr.getAuthCredential(), method, extraParams);
+  
+    return this.http.get(url)
+      .map((res: Response) => res.json().photoset as Photoset)
       .catch((err:any) => Observable.throw(err.json().error || 'Server error'));
   }
 
