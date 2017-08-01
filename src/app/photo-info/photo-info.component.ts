@@ -21,6 +21,18 @@ export class PhotoInfoComponent implements OnInit {
               private apiService: FlickrApiService
   ) { }
   ngOnInit() {
+  private getOriginalSize(sizes: Size[]): Size {
+    let size: Size;  
+    for (let i = 0; i < sizes.length; i++) {
+      if (sizes[i].label == "Original") {
+        size = sizes[i];
+        break;
+      }
+    }
+
+    return size;
+  }
+
   private returnToAlbum() {
     this.activatedRoute.params.subscribe(params => {
       this.router.navigate(["album", params['photosetId']]);
