@@ -13,6 +13,8 @@ import { FlickrOauthLoginCallbackComponent } from './flickr-oauth-login-callback
 import { FlickrLoginComponent } from './flickr-login/flickr-login.component';
 import { AlbumsListComponent } from './albums-list/albums-list.component';
 import { NavigationTabsComponent } from './navigation-tabs/navigation-tabs.component';
+import { PhotoListComponent } from './photo-list/photo-list.component';
+import { PhotoComponent } from './photo/photo.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { NavigationTabsComponent } from './navigation-tabs/navigation-tabs.compo
     FlickrOauthLoginCallbackComponent,
     FlickrLoginComponent,
     AlbumsListComponent,
-    NavigationTabsComponent
+    NavigationTabsComponent,
+    PhotoListComponent,
+    PhotoComponent
   ],
   imports: [
     BrowserModule,
