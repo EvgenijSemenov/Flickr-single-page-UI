@@ -1,4 +1,9 @@
+import { Size } from '../model/size';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Photo } from '../model/photo';
+
+import { FlickrApiService } from '../flickr-api.service';
 
 @Component({
   selector: 'app-photo-info',
@@ -7,7 +12,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PhotoInfoComponent implements OnInit {
 
-  constructor() { }
+  private photo: Photo;
+  private photoSize: Size;
+  private photoOriginalSize: Size;
 
   ngOnInit() {
   }
