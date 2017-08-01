@@ -16,6 +16,10 @@ export class PhotoInfoComponent implements OnInit {
   private photoSize: Size;
   private photoOriginalSize: Size;
 
+  constructor(private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private apiService: FlickrApiService
+  ) { }
   ngOnInit() {
   }
 
