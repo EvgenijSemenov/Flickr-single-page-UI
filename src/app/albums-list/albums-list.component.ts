@@ -50,6 +50,9 @@ export class AlbumsListComponent implements OnInit {
       "oauthTokenSecret": localStorage.getItem("oauth_token_secret")
     }
   }
+
+  private isAllPhotosetsLoaded(): boolean {
+    return (this.photosetList.length == this.photosetsTotal);
   }
 
 }
