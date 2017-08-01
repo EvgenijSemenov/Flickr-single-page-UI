@@ -37,8 +37,15 @@ export class PhotoListComponent implements OnInit {
       });
   }
 
-  private isAllPhotosLoaded() {
-    return false;
+  private isShowMoreButtonHidden(): boolean {
+    let result: boolean = true;
+    if (this.photoset && this.photos) {
+      if (this.photos.length < this.photoset.photos) {
+        result = false;
+      }
+    }
+
+    return result;
   }
 
 }
