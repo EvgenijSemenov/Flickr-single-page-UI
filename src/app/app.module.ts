@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
+import { MomentModule } from 'angular2-moment';
 import { AppComponent } from './app.component';
 import { FlickrLoginService } from './flickr-login.service';
 import { FlickrApiService } from './flickr-api.service';
@@ -38,7 +39,8 @@ import { NavigationTabsComponent } from './navigation-tabs/navigation-tabs.compo
         path: 'albums',
         component: AlbumsListComponent
       }
-    ])
+    ]),
+    MomentModule
   ],
   providers: [
     FlickrLoginService,
