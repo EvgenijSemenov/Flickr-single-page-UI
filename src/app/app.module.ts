@@ -15,7 +15,7 @@ import { FlickrLoginComponent } from './flickr-login/flickr-login.component';
 import { AlbumsListComponent } from './albums-list/albums-list.component';
 import { NavigationTabsComponent } from './navigation-tabs/navigation-tabs.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
-import { PhotoComponent } from './photo/photo.component';
+import { PhotoInfoComponent } from './photo-info/photo-info.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { PhotoComponent } from './photo/photo.component';
     AlbumsListComponent,
     NavigationTabsComponent,
     PhotoListComponent,
-    PhotoComponent
+    PhotoInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -45,8 +45,12 @@ import { PhotoComponent } from './photo/photo.component';
         component: AlbumsListComponent
       },
       {
-        path: 'albums/:id',
+        path: 'album/:id',
         component: PhotoListComponent
+      },
+      {
+        path: 'album/:photosetId/photo/:photoId',
+        component: PhotoInfoComponent
       }
     ]),
     MomentModule,
