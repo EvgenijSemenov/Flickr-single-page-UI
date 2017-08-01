@@ -1,0 +1,56 @@
+.album-title {
+    color: rgba(120, 120, 120, 1);
+    display: flex;
+    align-items: center;
+    padding: 2px;
+}
+
+.back-icon {
+    font-size: 26px;
+    padding-right: 10px;
+    font-weight: bold;
+}
+
+.back-icon:hover {
+    color: #337ab7;
+    cursor:pointer;
+}
+
+.folder-icon {
+    font-size: 21px;
+    padding-right: 10px;
+}
+
+.album-title-text {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.photo {
+    background-color: rgba(120, 120, 120, 0.15);
+    border-bottom:1px solid #ddd;
+    border-radius: 5px;
+    margin: 8px;
+    display: grid;
+}
+
+.photo img{
+    border-radius: 5px 5px 0 0;
+}
+
+.photos-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.photo-select {
+    font-size: 12px;
+    font-weight: bold;
+    color: #337ab7;
+    text-decoration: underline;
+    margin-left: 5px;
+}
+
+.photo-select.select {
+    margin-left: 5px;
+}
