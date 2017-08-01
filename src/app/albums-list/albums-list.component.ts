@@ -41,6 +41,15 @@ export class AlbumsListComponent implements OnInit {
     this.flickrApiServicel.photosetListByUserId(this.userId, page, this.photosetPerPage, this.appCredential())
       .subscribe(photosetList => this.photosetList = this.photosetList.concat(photosetList));
   }
+
+  private appCredential(): any {
+    return {
+      "apiKey": environment.apiKey,
+      "apiSecret": environment.apiSecret,
+      "oauthToken": localStorage.getItem("oauth_token"),
+      "oauthTokenSecret": localStorage.getItem("oauth_token_secret")
+    }
+  }
   }
 
 }
