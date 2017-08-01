@@ -2,7 +2,7 @@
   <h5>Welcome, {{fullName}}</h5>
 </div>
 <template ngFor let-photoset [ngForOf] = "photosetList">
-  <div class="col-md-12 bottom-border album vertical-align">
+  <div class="col-md-12 bottom-border album vertical-align" (click)="openAlbum(photoset.id)">
     <div class="col-md-2">
       <img class="img-padding" [src]="photoset.primary_photo_extras.url_sq" />
     </div>
