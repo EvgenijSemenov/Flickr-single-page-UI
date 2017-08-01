@@ -1,0 +1,55 @@
+.bottom-border {
+    border-bottom:1px solid #ddd;
+}
+
+.album {
+    background-color: rgba(160, 160, 160, 0.15);
+}
+
+.album:hover {
+    background-color: rgba(160, 160, 160, 0.3);
+    cursor:pointer;
+}
+
+.album-title {
+    font-size: 14px;
+    color: #337ab7;
+    font-weight: bold;
+}
+
+.album-details {
+    font-size: 12px;
+    font-weight: bold;
+    color: #9E9E9E;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+.angle-double-right {
+    font-size: 26px;
+    font-weight: bold;
+    color: #337ab7;
+}
+
+.img-padding {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 65px;
+}
+
+.album-info {
+    padding-left: 0px;
+    width: 100%; 
+}
+
+.load-more {
+    background-color: rgba(160, 160, 160, 0.20);
+}
+
+.load-more:hover {
+    background-color: rgba(160, 160, 160, 0.35);
+    cursor:pointer;
+}
