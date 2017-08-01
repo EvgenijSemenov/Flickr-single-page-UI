@@ -7,7 +7,14 @@
   <div class="col-md-12 photos-grid">
     <template ngFor let-photo [ngForOf] = "photos">
       <div class="photo">
-        <img [src]="photo.url_sq" />
+        <template #photoTooltip>
+          <div class="text-left">
+          Title: {{photo.title}}<br>
+          Uploaded: {{(photo.dateupload | amFromUnix) | amTimeAgo}}<br>
+          Original format: {{photo.originalformat}}<br>
+          </div>
+        </template>
+        <img [src]="photo.url_sq" placement="bottom" [tooltip]="photoTooltip" />
         <span class="photo-select">
           <i class="fa fa-check" aria-hidden="true"></i><span class="text">Select</span>
         </span>
