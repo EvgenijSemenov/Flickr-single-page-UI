@@ -39,7 +39,7 @@ export class FlickrApiService {
     let method = "flickr.photosets.getPhotos";
     let extraParams: string = "user_id=" + userId;
     extraParams += "&photoset_id=" + photosetId;
-    extraParams += "&extras=url_sq";
+    extraParams += "&extras=url_sq, date_upload, original_format";
     extraParams += "&page=" + page;
     extraParams += "&per_page=" + perPage;
     let url: string = FlickrRequestUrlBuilder.apiUrl(Flickr.getAuthCredential(), method, extraParams);
