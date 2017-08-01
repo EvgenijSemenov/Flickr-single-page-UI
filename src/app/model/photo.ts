@@ -4,7 +4,8 @@ export class Photo {
     public id: string,
     public title: string,
     public url_sq: string,
-    public description: string
+    public dateupload: string,
+    public originalformat: string
   ){ }
 
 }
