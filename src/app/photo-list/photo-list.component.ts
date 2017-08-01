@@ -18,9 +18,12 @@ export class PhotoListComponent implements OnInit {
   constructor(private activatedRoute : ActivatedRoute, private apiService: FlickrApiService) { }
 
   ngOnInit() {
+    this.initData();
+  }
+
+  private initData() {
     this.activatedRoute.params.subscribe(params => {
-       this.photosetId = params['id']; 
-       this.loadPhotos();
+      this.initPhotoset(localStorage.getItem("id"), params['id']);
     });
   }
 
