@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+.bottom-border {
+    border-bottom:1px solid #ddd;
+}
+
+.load-more {
+    background-color: rgba(160, 160, 160, 0.20);
+}
+
+.angle-double-down {
+    font-size: 26px;
+    font-weight: bold;
+    color: #337ab7;
+}
+
+.album-info {
+    padding-left: 0px;
+    width: 100%; 
+}
+
+.load-more:hover {
+    background-color: rgba(160, 160, 160, 0.35);
+    cursor:pointer;
+}
