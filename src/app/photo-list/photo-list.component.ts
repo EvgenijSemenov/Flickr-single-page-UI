@@ -1,6 +1,7 @@
-import { Photo } from '../model/photo';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Photoset } from '../model/photoset';
+import { Photo } from '../model/photo';
 import { FlickrApiService } from '../flickr-api.service';
 
 @Component({
@@ -10,9 +11,9 @@ import { FlickrApiService } from '../flickr-api.service';
 })
 export class PhotoListComponent implements OnInit {
 
-  private photosetId: string = "";
+  private photoset: Photoset;
   private photoPerPage: number = 18;
-  private photos: Photo[] = [];
+  private photos: Photo[];
 
   constructor(private activatedRoute : ActivatedRoute, private apiService: FlickrApiService) { }
 
