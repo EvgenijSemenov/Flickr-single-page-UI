@@ -1,7 +1,9 @@
 <div class="col-md-12 album-title bottom-border">
   <i class="fa fa-angle-left back-icon" aria-hidden="true" routerLink="/albums"></i>
   <i class="fa fa-folder folder-icon" aria-hidden="true"></i>
-  <span class="album-title-text">Trees</span>
+  <template [ngIf]="this.photoset?.title?._content">
+    <span class="album-title-text">{{this.photoset.title._content}}</span>
+  </template>
 </div>
 <div class="row">
   <div class="col-md-12 photos-grid">
