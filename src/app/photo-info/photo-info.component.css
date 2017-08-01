@@ -1,0 +1,16 @@
+.photo-info-title {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.previewe {
+    font-size: 12px;
+    font-weight: bold;
+    display: grid;
+}
+
+.previewe img {
+    margin: 5px;
+    max-width: 100%;
+}
+
