@@ -1,4 +1,26 @@
 <div class="col-md-12 top-info-panel bottom-border">
-  <i class="fa fa-angle-left back-icon" aria-hidden="true" routerLink="/albums"></i>
-  <span class="top-info-panel-text">Trees</span>
+  <i class="fa fa-angle-left back-icon" aria-hidden="true" (click)="returnToAlbum()"></i>
+  <template [ngIf]="this.photo">
+    <span class="top-info-panel-text">{{this.photo.title._content}}</span>
+  </template>
+</div>
+<div class="col-md-12 previewe text-center bottom-border" *ngIf="this.photoSize && this.photoOriginalSize">
+  <img [src]="this.photoSize.source" />
+  <span class="text">Photo size: {{this.photoSize.width}}x{{this.photoSize.height}}</span>
+  <span class="text">Original photo size: {{this.photoOriginalSize.width}}x{{this.photoOriginalSize.height}}</span>
+</div>
+<div class="photo-info" *ngIf="this.photo">
+  <div class="col-md-3 photo-info-title">Title:</div>
+  <div class="col-md-9">{{this.photo.title._content}}</div>
+  <div class="col-md-3 photo-info-title">Description:</div>
+  <div *ngIf="this.photo.description._content != '' " class="col-md-9">
+    {{this.photo.description._content}}
+  </div>
+  <div *ngIf="this.photo.description._content == '' " class="col-md-9">
+    photo description is empty...
+  </div>
+  <div class="col-md-3 photo-info-title">Original format:</div>
+  <div class="col-md-9">{{this.photo.originalformat}}</div>
+  <div class="col-md-3 photo-info-title">Uploaded:</div>
+  <div class="col-md-9">{{(this.photo.dateuploaded | amFromUnix) | amTimeAgo}}</div>
 </div>
