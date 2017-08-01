@@ -13,12 +13,13 @@ import { Photoset } from '../model/photoset';
 })
 export class AlbumsListComponent implements OnInit {
 
-  constructor() { }
   private userId: string = "";
   private fullName: string = "";
   private photosetList: Photoset[] = [];
   private photosetsTotal: number = 0;
   private photosetPerPage: number = 10;
+
+  constructor(private flickrApiServicel: FlickrApiService) { }
 
   ngOnInit() {
   }
