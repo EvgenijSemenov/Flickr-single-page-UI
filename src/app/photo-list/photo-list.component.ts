@@ -27,17 +27,34 @@ export class PhotoListComponent implements OnInit {
     });
   }
 
+  private initPhotoset(userId: string, photosetId: string) {
+    this.apiService.getPhotoset(userId, photosetId)
+      .subscribe(photoset => {
+        this.photoset = photoset;
+        this.loadPhotos()
+      });
+  }
+
   private loadPhotos() {
+    this.apiService.getPhotosByPhotosetId(localStorage.getItem("id"), this.photoset.id, this.photoLoadPageNumber(), this.photoPerPage)
+      .subscribe(photos => this.addPhotosInList(photos));
+  }
+
+  private photoLoadPageNumber(): number {
     let page: number = 1;
-    if (this.photos.length > 0) {
+    if (this.photos) {
       page = this.photos.length / this.photoPerPage + 1;
     }
 
-    this.apiService.getPhotosByPhotosetId(localStorage.getItem("id"), this.photosetId, page, this.photoPerPage)
-      .subscribe(photos => {
-        this.photos = this.photos.concat(photos);
-        console.log(this.photos);
-      });
+    return page;
+  }
+
+  private addPhotosInList(photos: Photo[]) {
+    if(this.photos) {
+      this.photos = this.photos.concat(photos);
+    } else {
+      this.photos = photos;
+    }
   }
 
   private isShowMoreButtonHidden(): boolean {
