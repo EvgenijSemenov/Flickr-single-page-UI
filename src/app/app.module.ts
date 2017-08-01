@@ -4,7 +4,8 @@ import { Renderer } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+ 
 import { MomentModule } from 'angular2-moment';
 import { AppComponent } from './app.component';
 import { FlickrLoginService } from './flickr-login.service';
@@ -48,7 +49,8 @@ import { PhotoComponent } from './photo/photo.component';
         component: PhotoListComponent
       }
     ]),
-    MomentModule
+    MomentModule,
+    TooltipModule.forRoot()
   ],
   providers: [
     FlickrLoginService,
