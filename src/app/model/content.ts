@@ -1,7 +1,7 @@
 export class Content {
 
     constructor(
-        _content: string
+        public _content: string
     ){}
 
 }

@@ -5,14 +5,14 @@ import { PrimaryPhotoExtras } from "./primary-photo-extras";
 export class Photoset {
 
     constructor(
-        id: string,
-        photos: number,
-        videos: number,
-        title: Content,
-        description: Content,
-        date_create: string,
-        date_update: string,
-        primary_photo_extras: PrimaryPhotoExtras
+        public id: string,
+        public photos: number,
+        public videos: number,
+        public title: Content,
+        public description: Content,
+        public date_create: string,
+        public date_update: string,
+        public primary_photo_extras: PrimaryPhotoExtras
     ){}
 
 }
