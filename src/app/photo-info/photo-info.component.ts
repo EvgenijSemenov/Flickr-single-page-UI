@@ -21,6 +21,10 @@ export class PhotoInfoComponent implements OnInit {
               private apiService: FlickrApiService
   ) { }
   ngOnInit() {
+  private returnToAlbum() {
+    this.activatedRoute.params.subscribe(params => {
+      this.router.navigate(["album", params['photosetId']]);
+    });
   }
 
 }
