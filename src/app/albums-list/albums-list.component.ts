@@ -1,10 +1,8 @@
-import { Data } from '@angular/router';
-import { PrimaryPhotoExtras } from '../model/primary-photo-extras';
-import { Content } from '../model/content';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { FlickrApiService } from '../flickr-api.service';
 import { Photoset } from '../model/photoset';
+import { Flickr } from '../flickr/flickr';
 
 @Component({
   selector: 'app-albums-list',
@@ -19,7 +17,7 @@ export class AlbumsListComponent implements OnInit {
   private photosetsTotal: number = 0;
   private photosetPerPage: number = 10;
 
-  constructor(private flickrApiServicel: FlickrApiService) { }
+  constructor(private router: Router, private flickrApiServicel: FlickrApiService) { }
 
   ngOnInit() {
     this.userId = localStorage.getItem("id");
@@ -28,7 +26,7 @@ export class AlbumsListComponent implements OnInit {
   }
 
   private initPhotosets() {
-    this.flickrApiServicel.photosetsTotal(this.userId, this.appCredential())
+    this.flickrApiServicel.photosetsTotal(this.userId)
       .subscribe(total => {
         this.photosetsTotal = total;
         if (this.photosetsTotal > 0) {
@@ -42,17 +40,8 @@ export class AlbumsListComponent implements OnInit {
     if (this.photosetList.length != 0) {
       page = this.photosetList.length / this.photosetPerPage + 1;
     }
-    this.flickrApiServicel.photosetListByUserId(this.userId, page, this.photosetPerPage, this.appCredential())
+    this.flickrApiServicel.photosetListByUserId(this.userId, page, this.photosetPerPage)
       .subscribe(photosetList => this.photosetList = this.photosetList.concat(photosetList));
-  }
-
-  private appCredential(): any {
-    return {
-      "apiKey": environment.apiKey,
-      "apiSecret": environment.apiSecret,
-      "oauthToken": localStorage.getItem("oauth_token"),
-      "oauthTokenSecret": localStorage.getItem("oauth_token_secret")
-    }
   }
 
   private isAllPhotosetsLoaded(): boolean {
