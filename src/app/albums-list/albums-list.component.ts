@@ -22,6 +22,10 @@ export class AlbumsListComponent implements OnInit {
   constructor(private flickrApiServicel: FlickrApiService) { }
 
   ngOnInit() {
+    this.userId = localStorage.getItem("id");
+    this.fullName = localStorage.getItem("fullname");
+    this.initPhotosets();
+  }
 
   private initPhotosets() {
     this.flickrApiServicel.photosetsTotal(this.userId, this.appCredential())
