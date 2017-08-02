@@ -9,12 +9,12 @@ import { MomentModule } from 'angular2-moment';
 import { AppComponent } from './app.component';
 import { FlickrLoginService } from './service/flickr-login.service';
 import { FlickrApiService } from './service/flickr-api.service';
-import { FlickrOauthLoginCallbackComponent } from './flickr-oauth-login-callback/flickr-oauth-login-callback.component';
-import { FlickrLoginComponent } from './flickr-login/flickr-login.component';
-import { AlbumsListComponent } from './albums-list/albums-list.component';
-import { NavigationTabsComponent } from './navigation-tabs/navigation-tabs.component';
-import { PhotoListComponent } from './photo-list/photo-list.component';
-import { PhotoInfoComponent } from './photo-info/photo-info.component';
+import { FlickrOauthLoginCallbackComponent } from './component/flickr-oauth-login-callback/flickr-oauth-login-callback.component';
+import { FlickrLoginComponent } from './component/flickr-login/flickr-login.component';
+import { AlbumsListComponent } from './component/albums-list/albums-list.component';
+import { NavigationTabsComponent } from './component/navigation-tabs/navigation-tabs.component';
+import { PhotoListComponent } from './component/photo-list/photo-list.component';
+import { PhotoInfoComponent } from './component/photo-info/photo-info.component';
 
 @NgModule({
   declarations: [

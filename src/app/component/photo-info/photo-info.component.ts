@@ -1,9 +1,8 @@
-import { Size } from '../model/size';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Photo } from '../model/photo';
-
-import { FlickrApiService } from '../service/flickr-api.service';
+import { Photo } from '../../model/photo';
+import { Size } from '../../model/size';
+import { FlickrApiService } from '../../service/flickr-api.service';
 
 @Component({
   selector: 'app-photo-info',
