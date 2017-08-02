@@ -7,6 +7,11 @@ export class Flickr {
     localStorage.setItem("oauth_token_secret", oauthTokenSecret);
   }
 
+  public static saveUserInfo(id: string, fullName: string) {
+    localStorage.setItem("id", id);
+    localStorage.setItem("fullname", fullName);
+  }
+
   public static getAuthCredential(): any {
     return {
       "apiKey": environment.apiKey,
