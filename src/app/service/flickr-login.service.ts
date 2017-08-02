@@ -1,7 +1,7 @@
 import { request } from 'http';
 import { Injectable } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
-import { FlickrRequestUrlBuilder } from './flickr/flickr-request-url-builder';
+import { FlickrRequestUrlBuilder } from '../flickr/flickr-request-url-builder';
 
 @Injectable()
 export class FlickrLoginService {

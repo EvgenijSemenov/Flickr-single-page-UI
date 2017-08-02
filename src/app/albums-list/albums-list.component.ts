@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { FlickrApiService } from '../flickr-api.service';
+import { FlickrApiService } from '../service/flickr-api.service';
 import { Photoset } from '../model/photoset';
 import { Flickr } from '../flickr/flickr';
 

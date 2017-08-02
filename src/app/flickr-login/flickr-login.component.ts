@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
-import { FlickrLoginService } from '../flickr-login.service';
+import { FlickrLoginService } from '../service/flickr-login.service';
 import { Flickr } from '../flickr/flickr';
 
 @Component({

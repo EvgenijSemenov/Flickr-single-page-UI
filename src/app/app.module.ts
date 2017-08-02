@@ -7,8 +7,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
  
 import { MomentModule } from 'angular2-moment';
 import { AppComponent } from './app.component';
-import { FlickrLoginService } from './flickr-login.service';
-import { FlickrApiService } from './flickr-api.service';
+import { FlickrLoginService } from './service/flickr-login.service';
+import { FlickrApiService } from './service/flickr-api.service';
 import { FlickrOauthLoginCallbackComponent } from './flickr-oauth-login-callback/flickr-oauth-login-callback.component';
 import { FlickrLoginComponent } from './flickr-login/flickr-login.component';
 import { AlbumsListComponent } from './albums-list/albums-list.component';

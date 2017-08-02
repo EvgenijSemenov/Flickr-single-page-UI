@@ -1,12 +1,12 @@
-import { Size } from './model/size';
-import { Photo } from './model/photo';
+import { Size } from '../model/size';
+import { Photo } from '../model/photo';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { Photoset } from './model/photoset';
-import { FlickrRequestUrlBuilder } from './flickr/flickr-request-url-builder';
+import { Photoset } from '../model/photoset';
+import { FlickrRequestUrlBuilder } from '../flickr/flickr-request-url-builder';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
-import { Flickr } from './flickr/flickr';
+import { Flickr } from '../flickr/flickr';
 
 @Injectable()
 export class FlickrApiService {

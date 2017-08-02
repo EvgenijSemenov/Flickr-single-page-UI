@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Photoset } from '../model/photoset';
 import { Photo } from '../model/photo';
-import { FlickrApiService } from '../flickr-api.service';
+import { FlickrApiService } from '../service/flickr-api.service';
 
 @Component({
   selector: 'app-photo-list',
