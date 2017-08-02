@@ -1,5 +1,8 @@
-.photo-info-title {
+.photo-info {
     font-size: 12px;
+}
+
+.photo-info .title {
     font-weight: bold;
 }
 
@@ -10,7 +13,8 @@
 }
 
 .previewe img {
-    margin: 5px;
+    margin: auto;
+    padding: 5px;
     max-width: 100%;
 }
 

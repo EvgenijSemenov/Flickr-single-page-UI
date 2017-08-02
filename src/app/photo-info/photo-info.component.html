@@ -10,17 +10,17 @@
   <span class="text">Original photo size: {{this.photoOriginalSize.width}}x{{this.photoOriginalSize.height}}</span>
 </div>
 <div class="photo-info" *ngIf="this.photo">
-  <div class="col-md-3 photo-info-title">Title:</div>
-  <div class="col-md-9">{{this.photo.title._content}}</div>
-  <div class="col-md-3 photo-info-title">Description:</div>
+  <div class="col-md-2 title">Title:</div>
+  <div class="col-md-10">{{this.photo.title._content}}</div>
+  <div class="col-md-2  title">Description:</div>
   <div *ngIf="this.photo.description._content != '' " class="col-md-9">
     {{this.photo.description._content}}
   </div>
   <div *ngIf="this.photo.description._content == '' " class="col-md-9">
     photo description is empty...
   </div>
-  <div class="col-md-3 photo-info-title">Original format:</div>
-  <div class="col-md-9">{{this.photo.originalformat}}</div>
-  <div class="col-md-3 photo-info-title">Uploaded:</div>
-  <div class="col-md-9">{{(this.photo.dateuploaded | amFromUnix) | amTimeAgo}}</div>
+  <div class="col-md-2 title">Original format:</div>
+  <div class="col-md-10">{{this.photo.originalformat}}</div>
+  <div class="col-md-2 title">Uploaded:</div>
+  <div class="col-md-10">{{(this.photo.dateuploaded | amFromUnix) | amTimeAgo}}</div>
 </div>
