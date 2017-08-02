@@ -12,7 +12,7 @@ import { FlickrApiService } from '../flickr-api.service';
 export class PhotoListComponent implements OnInit {
 
   private photoset: Photoset;
-  private photoPerPage: number = 18;
+  private photoPerPage: number = 30;
   private photos: Photo[];
 
   constructor(private activatedRoute: ActivatedRoute,
