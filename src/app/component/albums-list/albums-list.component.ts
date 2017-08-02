@@ -13,39 +13,47 @@ export class AlbumsListComponent implements OnInit {
 
   private userId: string = "";
   private fullName: string = "";
-  private photosetList: Photoset[] = [];
-  private photosetsTotal: number = 0;
+  private photosets: Photoset[];
+  private photosetsTotal: number;
   private photosetPerPage: number = 10;
 
   constructor(private router: Router, private flickrApiServicel: FlickrApiService) { }
 
   ngOnInit() {
-    this.userId = localStorage.getItem("id");
-    this.fullName = localStorage.getItem("fullname");
-    this.initPhotosets();
+    this.initData();
   }
 
-  private initPhotosets() {
+  private initData() {
+    this.userId = localStorage.getItem("id");
+    this.fullName = localStorage.getItem("fullname");
+    this.initPhotosetsTotal();
+    this.loadPhotoset();
+  }
+
+  private initPhotosetsTotal() {
     this.flickrApiServicel.photosetsTotal(this.userId)
-      .subscribe(total => {
-        this.photosetsTotal = total;
-        if (this.photosetsTotal > 0) {
-          this.loadPhotoset();
-        }
-      });
+      .subscribe(total => this.photosetsTotal = total);
   }
 
   private loadPhotoset() {
     let page: number = 1
-    if (this.photosetList.length != 0) {
-      page = this.photosetList.length / this.photosetPerPage + 1;
+    if (this.photosets) {
+      page = this.photosets.length / this.photosetPerPage + 1;
     }
     this.flickrApiServicel.photosetListByUserId(this.userId, page, this.photosetPerPage)
-      .subscribe(photosetList => this.photosetList = this.photosetList.concat(photosetList));
+      .subscribe(photosets => this.addPhotosets(photosets));
+  }
+
+  private addPhotosets(photosets: Photoset[]) {
+    if(this.photosets) {
+      this.photosets = this.photosets.concat(photosets);
+    } else {
+      this.photosets = photosets;
+    }
   }
 
   private isAllPhotosetsLoaded(): boolean {
-    return (this.photosetList.length == this.photosetsTotal);
+    return (this.photosets.length == this.photosetsTotal);
   }
 
   private openAlbum(id: string) {
