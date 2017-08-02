@@ -33,4 +33,11 @@ export class Flickr {
     }
   }
 
+  public static clearAuthData() {
+    localStorage.removeItem("id");
+    localStorage.removeItem("fullname");
+    localStorage.removeItem("oauth_token");
+    localStorage.removeItem("oauth_token_secret");
+  }
+
 }
