@@ -34,7 +34,6 @@ export class PhotoInfoComponent implements OnInit {
   private initPhoto(photoId: string) {
     this.apiService.getPhotoInfo(photoId).subscribe(photo => {
       this.photo = photo;
-      console.log(this.photo);
     });
   }
 

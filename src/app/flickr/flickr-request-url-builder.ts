@@ -18,8 +18,6 @@ export class FlickrRequestUrlBuilder {
     url += "&" + this.oauthCallbackParam();
     url += "&" + this.urlSignatureParam("GET", url, appCredential);
 
-    console.log(url);
-
     return this.removeFlickrUrlPrefix(url);
   }
 
@@ -111,9 +109,6 @@ export class FlickrRequestUrlBuilder {
   }
 
   private static urlSignatureParam(requestMethod:string, url: string, appCredential): string {
-    console.log(requestMethod);
-    console.log(url);
-    console.log(appCredential);
     let baseString: string = requestMethod + "&" + this.baseStringFromUrl(url);
     let hmacSHA1: string = CryptoJS.HmacSHA1(baseString, appCredential["apiSecret"] + "&" + appCredential["oauthTokenSecret"]);
 
