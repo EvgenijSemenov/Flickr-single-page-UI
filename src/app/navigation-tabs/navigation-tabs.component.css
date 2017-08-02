@@ -1,0 +1,22 @@
+.nav-tabs {
+    font-size: 18px;
+    padding-left: 10px;
+}
+
+.nav-tabs > li.active > a {
+    color: rgba(50, 120, 180, 1);
+}
+
+.nav-tabs > li > .disable {
+    border: 1px solid rgba(220, 220, 220, 0.5);
+}
+
+.nav-tabs > li > a {
+    color: rgba(50, 120, 180, 0.5);
+}
+
+.nav > li > a {
+    padding: 5px 15px;
+}
+
+
