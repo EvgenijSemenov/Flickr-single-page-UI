@@ -13,6 +13,6 @@ export class Photoset {
         public date_create: string,
         public date_update: string,
         public primary_photo_extras: PrimaryPhotoExtras
-    ){}
+    ){ }
 
 }
