@@ -15,6 +15,7 @@ import { AlbumsListComponent } from './component/albums-list/albums-list.compone
 import { NavigationTabsComponent } from './component/navigation-tabs/navigation-tabs.component';
 import { PhotoListComponent } from './component/photo-list/photo-list.component';
 import { PhotoInfoComponent } from './component/photo-info/photo-info.component';
+import { HeaderComponent } from './component/header/header.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PhotoInfoComponent } from './component/photo-info/photo-info.component'
     AlbumsListComponent,
     NavigationTabsComponent,
     PhotoListComponent,
-    PhotoInfoComponent
+    PhotoInfoComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
