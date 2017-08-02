@@ -1,5 +1,10 @@
 <div class="col-md-12 top-info-panel bottom-border">
-  <span class="top-info-panel-text">Welcome, {{fullName}}</span>
+  <div class="col-md-11">
+    <span class="top-info-panel-text">Welcome, {{fullName}}.</span>
+  </div>
+  <div class="col-md-1">
+    <app-logout></app-logout>
+  </div>
 </div>
 <template [ngIf]="this.photosets">
   <template ngFor let-photoset [ngForOf] = "photosets">

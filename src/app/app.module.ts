@@ -16,6 +16,7 @@ import { NavigationTabsComponent } from './component/navigation-tabs/navigation-
 import { PhotoListComponent } from './component/photo-list/photo-list.component';
 import { PhotoInfoComponent } from './component/photo-info/photo-info.component';
 import { HeaderComponent } from './component/header/header.component';
+import { LogoutComponent } from './component/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { HeaderComponent } from './component/header/header.component';
     PhotoListComponent,
     PhotoInfoComponent,
     HeaderComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
